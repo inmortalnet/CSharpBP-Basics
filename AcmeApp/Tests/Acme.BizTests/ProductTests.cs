@@ -28,5 +28,20 @@ namespace Acme.Biz.Tests
             // Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod()]
+        public void ParameterizedConstructor()
+        {
+            // Arrange
+            var currentProduct = new Product(0, "Hammer", "Hack away with this shiny tool.");
+            
+            var expected = "[0] Hammer: Hack away with this shiny tool.";
+
+            // Act
+            var actual = currentProduct.Print();
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
