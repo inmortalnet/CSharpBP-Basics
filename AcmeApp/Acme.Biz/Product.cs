@@ -12,6 +12,8 @@ namespace Acme.Biz
         #region Constructors
         public Product()
         {
+            //this.Vendor = new Vendor();
+
             Console.WriteLine("Product instance created.");
         }
 
@@ -49,14 +51,30 @@ namespace Acme.Biz
             get { return description; }
             set { description = value; }
         }
+
+        private Vendor vendor;
+
+        public Vendor Vendor
+        {
+            get {
+                // Lazy Loading
+                if (vendor == null)
+                {
+                    vendor = new Vendor();
+                }
+                return vendor;
+            }
+            set { vendor = value; }
+        }
+
         #endregion
 
         #region Methods
 
         public string Print()
         {
-            var vendor = new Vendor();
-            vendor.SendWelcomeEmail("Message from Product instance");
+            //var vendor = new Vendor();
+            //vendor.SendWelcomeEmail("Message from Product instance");
 
             var emailService = new EmailService();
             emailService.SendMessage("New Product", this.name, "sales@abc.com");

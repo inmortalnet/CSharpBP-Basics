@@ -19,6 +19,7 @@ namespace Acme.Biz.Tests
             currentProduct.Id = 0;
             currentProduct.Name = "Hammer";
             currentProduct.Description = "Hack away with this shiny tool.";
+            currentProduct.Vendor.CompanyName = "ABC Inc.";
 
             var expected = "[0] Hammer: Hack away with this shiny tool.";
 
@@ -30,11 +31,31 @@ namespace Acme.Biz.Tests
         }
 
         [TestMethod()]
-        public void ParameterizedConstructor()
+        public void PrintTest_ParameterizedConstructor()
         {
             // Arrange
             var currentProduct = new Product(0, "Hammer", "Hack away with this shiny tool.");
-            
+
+            var expected = "[0] Hammer: Hack away with this shiny tool.";
+
+            // Act
+            var actual = currentProduct.Print();
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void PrintTest_ObjectInitializater()
+        {
+            // Arrange
+            var currentProduct = new Product
+            {
+                Id = 0,
+                Name = "Hammer",
+                Description = "Hack away with this shiny tool."
+            };
+
             var expected = "[0] Hammer: Hack away with this shiny tool.";
 
             // Act
