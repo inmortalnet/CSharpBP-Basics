@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Acme.Common;
+using System;
+using static Acme.Common.LoggingService;
 
 namespace Acme.Biz
 {
@@ -11,6 +9,7 @@ namespace Acme.Biz
     /// </summary>
     public class Product
     {
+        #region Constructors
         public Product()
         {
             Console.WriteLine("Product instance created.");
@@ -24,7 +23,9 @@ namespace Acme.Biz
 
             Console.WriteLine("Product instance has name: {0}", Name);
         }
+        #endregion
 
+        #region Properties
         private int id;
 
         public int Id
@@ -48,11 +49,23 @@ namespace Acme.Biz
             get { return description; }
             set { description = value; }
         }
+        #endregion
+
+        #region Methods
 
         public string Print()
         {
-            return String.Format("[{0}] {1}: {2}", Id, Name, Description);
+            var vendor = new Vendor();
+            vendor.SendWelcomeEmail("Message from Product instance");
+
+            var emailService = new EmailService();
+            emailService.SendMessage("New Product", this.name, "sales@abc.com");
+
+            var result = LogAction("Print method in Product class");
+
+            return string.Format("[{0}] {1}: {2}", Id, Name, Description);
         }
 
+        #endregion        
     }
 }
